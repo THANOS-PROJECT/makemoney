@@ -78,6 +78,7 @@ def naver() :
         txts.append(txt['title'])
         
 def naverCurrentCurrency() :
+    URL = ''
     
 
 hankyong()
