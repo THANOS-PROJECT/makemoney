@@ -4,6 +4,9 @@ import requests
 from bs4 import BeautifulSoup
 import toTextFile
 
+from pykrx import stock
+from pykrx import bond
+
 txts = []
 
 def extractTxts(source) :
@@ -79,13 +82,23 @@ def naver() :
         
 def naverCurrentCurrency() :
     URL = ''
+    page = ''
+
+def stockInfo() :
+    tickers = stock.get_market_ticker_list("20231109", market="KOSDAQ")
+    
+    for ticker in stock.get_market_ticker_list():
+        종목 = stock.get_market_ticker_name(ticker)
+        print(종목)
     
 
-hankyong()
-naver()
+#hankyong()
+#naver()
+
+#ticker
 
 
-#텍스트 파일로 추출한다
+
 toTextFile.printToText(txts)
 
     
