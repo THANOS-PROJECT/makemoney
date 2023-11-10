@@ -79,6 +79,7 @@ def naver() :
         
 def naverCurrentCurrency() :
     URL = ''
+    page = ''
     
 
 hankyong()
