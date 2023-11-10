@@ -2,7 +2,8 @@ import os
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-#import ToTextFile
+import toTextFile
+
 from pykrx import stock
 from pykrx import bond
 
@@ -95,9 +96,6 @@ for ticker in stock.get_market_ticker_list():
     print(종목)
 
 
-#텍스트 파일로 추출한다
-#ToTextFile.printToText()
-
-
+toTextFile.printToText(txts)
 
     
