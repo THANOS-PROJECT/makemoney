@@ -83,17 +83,20 @@ def naver() :
 def naverCurrentCurrency() :
     URL = ''
     page = ''
+
+def stockInfo() :
+    tickers = stock.get_market_ticker_list("20231109", market="KOSDAQ")
+    
+    for ticker in stock.get_market_ticker_list():
+        종목 = stock.get_market_ticker_name(ticker)
+        print(종목)
     
 
 #hankyong()
 #naver()
 
 #ticker
-tickers = stock.get_market_ticker_list("20231109", market="KOSDAQ")
 
-for ticker in stock.get_market_ticker_list():
-    종목 = stock.get_market_ticker_name(ticker)
-    print(종목)
 
 
 toTextFile.printToText(txts)
