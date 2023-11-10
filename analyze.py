@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import ToTextFile
+import toTextFile
 
 txts = []
 
@@ -86,6 +86,6 @@ naver()
 
 
 #텍스트 파일로 추출한다
-ToTextFile.printToText()
+toTextFile.printToText(txts)
 
     
