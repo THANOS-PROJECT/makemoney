@@ -4,14 +4,17 @@ Created on Fri Nov 10 16:56:02 2023
 
 @author: cuu225
 """
+from datetime import datetime
+import requests
 
-def printToText():
-    global txts
+def printToText(txts):
+    # global txts
     
     fileName = datetime.now().strftime("%Y_%m_%dT%H_%M_%S")
     print(fileName)
     
-    fileFullPath = f'C:/Users/cuu22/Desktop/private/{fileName}.txt'
+    fileFullPath = f'C:/Users/Admin/Desktop/makemoney_prj/{fileName}.txt'
+
     print(fileFullPath)
     
     #txt 모아서 파일로 만들기
