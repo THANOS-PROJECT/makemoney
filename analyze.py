@@ -97,8 +97,6 @@ def stockInfo() :
 
 #ticker
 
-
-
 toTextFile.printToText(txts)
 
     
