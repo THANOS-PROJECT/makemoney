@@ -3,9 +3,11 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 import toTextFile
+import ourTime
 
 from pykrx import stock
 from pykrx import bond
+
 
 txts = []
 
@@ -83,20 +85,25 @@ def naver() :
 def naverCurrentCurrency() :
     URL = ''
     page = ''
-
-def stockInfo() :
-    tickers = stock.get_market_ticker_list("20231109", market="KOSDAQ")
+        
+def checkBond() :
+    #국채 10년물의 3일치를 보고 3일치가 하락 중이라면 매도에 가중치를 준다
+    #1일전 YYYYMMDD
+    #3일전 YYYYMMDD
+    df = bond.get_otc_treasury_yields(ourTime.ago(-3), ourTime.ago(-1), "국고채10년")
+    #print(df.head())
     
-    for ticker in stock.get_market_ticker_list():
-        종목 = stock.get_market_ticker_name(ticker)
-        print(종목)
-    
+    #제일큰 하락율 - 제일 작은 하락율 / 제일 큰 하락율 * 100 * 0.4 (채권 가중치)
+    print(df)
+    print(df.iloc)
+    print(df.iloc[1].수익률)
 
 #hankyong()
 #naver()
 
-#ticker
+checkBond()
 
-toTextFile.printToText(txts)
+#toTextFile.printToText(txts)
+
 
     
