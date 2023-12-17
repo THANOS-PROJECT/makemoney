@@ -1,0 +1,4 @@
+exchange_calendars
+beautifulsoup4
+pykrx
+requests
