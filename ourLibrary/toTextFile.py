@@ -5,7 +5,6 @@ Created on Fri Nov 10 16:56:02 2023
 @author: cuu225
 """
 from datetime import datetime
-import requests
 
 def printToText(txts):
     # global txts
