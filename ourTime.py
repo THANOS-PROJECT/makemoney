@@ -7,6 +7,15 @@ Created on Sat Dec 16 19:00:30 2023
 
 from datetime import date, datetime, timezone, timedelta
 
+# import sys
+# sys.path.append(r'c:\users\admin\appdata\local\programs\python\python310\lib')
+
+import exchange_calendars as ecals
+
+# XKRX = ecals.get_calendar("XKRX") # 한국 코드
+# print(XKRX.is_session("2021-09-20")) # 2021-09-20 은 개장일인지 확인
+
+
 # n일전 날짜를 "yyyymmdd"형태로 구한다
 # 주어진 날을 계산했을때 토요일, 일요일이면 전주 금요일 값을 return 한다
 
