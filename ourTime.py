@@ -10,7 +10,7 @@ from datetime import date, datetime, timezone, timedelta
 # import sys
 # sys.path.append(r'c:\users\admin\appdata\local\programs\python\python310\lib')
 
-import exchange_calendars as ecals
+# import exchange_calendars as ecals
 
 # XKRX = ecals.get_calendar("XKRX") # 한국 코드
 # print(XKRX.is_session("2021-09-20")) # 2021-09-20 은 개장일인지 확인
