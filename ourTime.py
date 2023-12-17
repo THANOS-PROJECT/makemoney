@@ -7,14 +7,9 @@ Created on Sat Dec 16 19:00:30 2023
 
 from datetime import date, datetime, timezone, timedelta
 
-# import sys
-# sys.path.append(r'c:\users\admin\appdata\local\programs\python\python310\lib')
-
-# import exchange_calendars as ecals
-
-# XKRX = ecals.get_calendar("XKRX") # 한국 코드
-# print(XKRX.is_session("2021-09-20")) # 2021-09-20 은 개장일인지 확인
-
+# 휴장일인지 여부 확인
+import exchange_calendars as ecals
+XKRX = ecals.get_calendar("XKRX") # 한국 코드
 
 # n일전 날짜를 "yyyymmdd"형태로 구한다
 # 주어진 날을 계산했을때 토요일, 일요일이면 전주 금요일 값을 return 한다
@@ -48,7 +43,7 @@ def ago(gap : int):
     if gap > 0 :
         while gapCount < gap :
             count += 1
-            if getGabWeedDay(time_record, count) < 5:
+            if getGabWeedDay(time_record, count) < 5 or XKRX.is_session(time_record):   # 해당 날짜가 휴장일인지도 추가 확인
                 gapCount += 1
     elif gap < 0 :
         while gap < gapCount :
