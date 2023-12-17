@@ -7,6 +7,10 @@ Created on Sat Dec 16 19:00:30 2023
 
 from datetime import date, datetime, timezone, timedelta
 
+# 휴장일인지 여부 확인
+import exchange_calendars as ecals
+XKRX = ecals.get_calendar("XKRX") # 한국 코드
+
 # n일전 날짜를 "yyyymmdd"형태로 구한다
 # 주어진 날을 계산했을때 토요일, 일요일이면 전주 금요일 값을 return 한다
 
@@ -39,12 +43,12 @@ def ago(gap : int):
     if gap > 0 :
         while index < gap :
             holidayIncludedCount += 1
-            if getGabWeedDay(today, holidayIncludedCount) < 5:
+            if getGabWeedDay(today, holidayIncludedCount) < 5 or XKRX.is_session(today):   # 해당 날짜가 휴장일인지도 추가 확인
                 index += 1
     elif gap < 0 :
         while gap < index :
             holidayIncludedCount -= 1
-            if getGabWeedDay(today, holidayIncludedCount) < 5:
+            if getGabWeedDay(today, holidayIncludedCount) < 5 or XKRX.is_session(today):   # 해당 날짜가 휴장일인지도 추가 확인
                 index -= 1
 
     return yyyymmdd( today + timedelta( days = holidayIncludedCount ))
