@@ -1,10 +1,16 @@
 from ourLogic import bond,kosdaq
-from ourLibrary import ourConstant
+from ourLibrary import ourConstant, toTextFile
 
 #오늘 코스닥, 채권 정보를 가지고 온다 (내용 추후 추가)
 corporateBond = bond.checkCorporateBond()
 nationalBond = bond.checkNationalBond()
 kosDaq = kosdaq.checkKosdaq()
+
+txts = []
+txts.append('회사채 증감율 : ' + str(corporateBond))
+txts.append('국채 증감율 : ' + str(nationalBond))
+txts.append('코스닥 증감율 : ' + str(kosDaq))
+
 
 todayIndexCalResult = corporateBond*ourConstant.__corporate_bond_weight__ 
 todayIndexCalResult += nationalBond*ourConstant.__national_bond_weight__ 
