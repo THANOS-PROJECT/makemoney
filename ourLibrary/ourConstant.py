@@ -1,5 +1,6 @@
 #판단하는 기준
 __bond_standard__ = 40
+__kosdaq_bond_standard__ = 100
 __corporate_bond_standard__ = 40
 __buying_criteria__ = 50
 
