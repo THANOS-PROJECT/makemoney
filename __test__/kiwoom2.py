@@ -42,9 +42,11 @@ class MyWindow(QMainWindow):
     def __init__(self) :
         super().__init__()
 
+        #로그인
         self.kiwoom = Kiwoom()
         self.kiwoom.CommConnect()
 
+        #로직
         self.kiwoom.SetInputValue("종목코드","005930")
         self.kiwoom.CommRqData("opt10001", "opt10001", 0, "0101")
 
