@@ -1,21 +1,53 @@
-import sys 
-from PyQt5.QtWidgets import *
-from PyQt5.QAxContainer import *
+#https://wikidocs.net/156339
+#키움로그인창 spy 00020afa "open api login"
+#고객 id control id - 000003E8
+import win32gui
+import win32con
+import win32api
+import time
 
 
-class MyWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.ocx = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")
-        self.ocx.dynamicCall("CommConnect()")
-        self.ocx.OnEventConnect.connect(self.slot_login)
+def window_enumeration_handler(hwnd, top_windows):
+    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
 
-    def slot_login(self, err_code):
-        print(err_code)
+
+def enum_windows():
+    windows = []
+    win32gui.EnumWindows(window_enumeration_handler, windows)
+    return windows
+
+
+def find_window(caption):
+    hwnd = win32gui.FindWindow(None, caption)
+    if hwnd == 0:
+        windows = enum_windows()
+        for handle, title in windows:
+            if caption in title:
+                hwnd = handle
+                break
+    return hwnd
+
+def enter_keys(hwnd, data):
+    win32api.SendMessage(hwnd, win32con.EM_SETSEL,0,-1)
+    win32api.SendMessage(hwnd, win32con.EM_REPLACESEL,0,data)
+
+def click_button(btn_hwnd):
+    win32api.PostMessage(btn_hwnd, win32con.WM_LBUTTONDOWN, 0, 0)
+    win32api.Sleep(100)
+    win32api.PostMessage(btn_hwnd, win32con.WM_LBUTTONUP, 0, 0)
+    win32api.Sleep(300)
 
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MyWindow()
-    window.show()
-    app.exec_()          
+    caption = "Open API Login"
+    hwnd = find_window(caption)
+
+    edit_id = win32gui.GetDlgItem(hwnd, 0x3E8)
+    edit_pass = win32gui.GetDlgItem(hwnd, 0x3E9)
+    edit_cert = win32gui.GetDlgItem(hwnd, 0x3EA)
+    btn_login = win32gui.GetDlgItem(hwnd, 0x1)
+
+    print("edit_pass",edit_pass)
+    enter_keys(edit_id, "cuu2252")
+    enter_keys(edit_pass, "ch0509")
+    click_button(btn_login)
