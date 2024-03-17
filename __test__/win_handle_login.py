@@ -1,6 +1,7 @@
-#https://wikidocs.net/156339
+#https://wikidocs.net/84130
 #키움로그인창 spy 00020afa "open api login"
 #고객 id control id - 000003E8
+#로그인 -> 버전처리
 import win32gui
 import win32con
 import win32api
