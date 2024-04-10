@@ -9,7 +9,6 @@ def checkNationalBond() :
     #1일전 YYYYMMDD
     #3일전 YYYYMMDD
     df = bond.get_otc_treasury_yields(ourTime.ago(-3), ourTime.ago(-1), "국고채10년")
-    #print(df.head())
 
     #제일큰 하락율 - 제일 작은 하락율 / 제일 큰 하락율 * 100 * 0.4 (채권 가중치)
     #print(df)
@@ -20,6 +19,8 @@ def checkNationalBond() :
     최소증감율 = min(증감율, key=abs)
     derivedValue = ( abs( 최대증감율 - 최소증감율 ) / abs(최소증감율) )
 
+    print("checkNationalBond.derivedValue : ", derivedValue)
+
     return 1 if derivedValue > ourConstant.__bond_standard__ else 0
 
 def checkCorporateBond():
@@ -29,10 +30,14 @@ def checkCorporateBond():
     for i in range(1,4) :
         df = bond.get_otc_treasury_yields(ourTime.ago(-1 * i))
         ratios.append(df.loc['회사채 AA-(무보증 3년)']['대비'])
+    
+    
         
     최대증감율 = max(ratios, key=abs)
     최소증감율 = min(ratios, key=abs)
     
-    derivedValue = ( abs( 최대증감율 - 최소증감율 ) / abs(최대증감율) )
+    derivedValue = ( abs( 최대증감율 - 최소증감율 ) / abs(최대증감율) ) * 100
+
+    print("checkCorporateBond.derivedValue : ", derivedValue)
 
     return 1 if derivedValue > ourConstant.__corporate_bond_standard__ else 0

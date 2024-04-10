@@ -2,3 +2,5 @@ exchange_calendars
 beautifulsoup4
 pykrx
 requests
+pyqt5==5.13
+pywin32
