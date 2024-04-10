@@ -19,6 +19,11 @@ def checkKosdaq() :
     df_2days = stock.get_index_price_change(ourTime.ago(-3), ourTime.ago(-2), "KOSDAQ") # 3일 전 ~ 2일 전 데이터 읽어오기
     df_1days = stock.get_index_price_change(ourTime.ago(-2), ourTime.ago(-1), "KOSDAQ") # 2일 전 ~ 1일 전 데이터 읽어오기
 
+    print(df_1days)
+    print(df_2days.iloc[1])
+
+    return 1
+
     등락률_2days = df_2days.iloc[1].등락률
     등락률_1days = df_1days.iloc[1].등락률
 
@@ -26,5 +31,8 @@ def checkKosdaq() :
     최대증감율 = round(max(등락률_2days, 등락률_1days), 4)
     최소증감율 = round(min(등락률_2days, 등락률_1days), 4)
 
+
     derivedValue = (abs(최대증감율 - 최소증감율) / abs(최소증감율)) * 100
+    print("checkKosdaq.derivedValue : ", derivedValue)
+
     return 1 if derivedValue > ourConstant.__kosdaq_bond_standard__ else 0
